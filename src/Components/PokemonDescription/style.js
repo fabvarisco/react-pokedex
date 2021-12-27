@@ -9,6 +9,7 @@ export const StyledBox = styled(Box)(() => ({
   background: "white",
   height: "90%",
   width: "70%",
+  minHeight:"678px",
   textAlign: "center",
   backgroundImage: `url(../../public/body_bg.png)`,
   borderRadius: 10,
