@@ -109,6 +109,27 @@ export const pokemonTypeStyle = {
       typecolor={pokemonColorStyle[pokemonType]}
     />
   ),
+  Dark: (index, id, pokemonType) => (
+    <StyledPokemonChip
+      key={`${index}-${id}`}
+      label={pokemonType}
+      typecolor={pokemonColorStyle[pokemonType]}
+    />
+  ),
+  Fairy: (index, id, pokemonType) => (
+    <StyledPokemonChip
+      key={`${index}-${id}`}
+      label={pokemonType}
+      typecolor={pokemonColorStyle[pokemonType]}
+    />
+  ),
+  Steel: (index, id, pokemonType) => (
+    <StyledPokemonChip
+      key={`${index}-${id}`}
+      label={pokemonType}
+      typecolor={pokemonColorStyle[pokemonType]}
+    />
+  ),
 };
 
 export const pokemonColorStyle = {
@@ -127,6 +148,9 @@ export const pokemonColorStyle = {
   Dragon: "#53a4cf",
   Rock: "#a38c21",
   Ghost: "#7b62a3",
+  Dark: "#424242",
+  Fairy: "#fdb9e9",
+  Steel: "#9eb7b8",
 };
 
 export function getPokemonEvolution(num) {

@@ -68,23 +68,27 @@ function PokemonDescription({}, ref) {
 
   function renderEvolutions() {
     return (
-      <Typography component="span" variant="h5" sx={{ mt: 2 }}>
-        Evoluções
-        <Stack
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          spacing={1}
-        >
-          {prev_evolution?.map(({ num }) => (
-            <img src={getPokemonEvolution(num)} key={`${num}-${id}`} />
-          ))}
+      <>
+        {((prev_evolution || next_evolution) && (
+            <Typography component="span" variant="h5" sx={{ mt: 2 }}>
+              Evoluções
+              <Stack
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                spacing={1}
+              >
+                {prev_evolution?.map(({ num }) => (
+                  <img src={getPokemonEvolution(num)} key={`${num}-${id}`} />
+                ))}
 
-          {next_evolution?.map(({ num }) => (
-            <img src={getPokemonEvolution(num)} key={`${num}-${id}`} />
+                {next_evolution?.map(({ num }) => (
+                  <img src={getPokemonEvolution(num)} key={`${num}-${id}`} />
+                ))}
+              </Stack>
+            </Typography>
           ))}
-        </Stack>
-      </Typography>
+      </>
     );
   }
 
