@@ -11,6 +11,7 @@ import {
   Toolbar,
   Skeleton,
   Stack,
+  Item,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import {
@@ -20,20 +21,19 @@ import {
   StyledPokemonNumber,
 } from "./style";
 import { pokemonTypeStyle } from "../../utils/utils";
-import { PokemonDescription } from "../../Components/PokemonDescription";
+import PokemonDescription from "../../Components/PokemonDescription";
 
 export function Pokedex() {
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [modalController, setModalController] = useState(false);
-  const [selectedPokemon, setSelectedPokemon] = useState({});
 
   const modalRef = useRef(null);
 
-  const handleOpenPokemonDescription = useCallback(() => {
+  function handleOpenPokemonDescription(pokemon) {
+    modalRef.current?.setPokemon(pokemon);
     modalRef.current?.handleControllPokemonDescription();
-  }, []);
+  }
 
   useEffect(() => {
     fetch(
@@ -51,7 +51,7 @@ export function Pokedex() {
     console.log(pokemons);
     if (!pokemons) return <>Loading</>;
     return (
-      <Box m={8}>
+      <Box m={8} mt={2}>
         <Grid
           container
           spacing={{ xs: 4, md: 2 }}
@@ -64,31 +64,37 @@ export function Pokedex() {
                 name.toLowerCase().includes(search) || num.includes(search)
               );
             })
-            .map(({ id, name, img, type, num }) => (
-              <Grid item xs sm={4} md={2} key={id}>
+            .map((pokemon) => (
+              <Grid
+                item
+                xs
+                sm={4}
+                md={2}
+                key={pokemon.id}
+                onClick={() => handleOpenPokemonDescription(pokemon)}
+              >
                 <Card sx={{ maxWidth: 345 }}>
                   <CardActionArea>
                     <CardMedia
                       component="img"
-                      image={img}
-                      alt={name}
+                      image={pokemon.img}
+                      alt={pokemon.name}
                       height="240"
                       style={{ background: "#CBC7C6" }}
-                      onClick={handleOpenPokemonDescription}
                     />
-                    <StyledPokemonNumber>#{num}</StyledPokemonNumber>
+                    <StyledPokemonNumber>#{pokemon.num}</StyledPokemonNumber>
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
-                        {name}
+                        {pokemon.name}
                       </Typography>
                     </CardContent>
                   </CardActionArea>
                   <CardContent>
                     <Stack direction="row" spacing={1}>
-                      {type?.map((pokemonType, index) => {
+                      {pokemon.type?.map((pokemonType, index) => {
                         return pokemonTypeStyle[pokemonType](
                           index,
-                          id,
+                          pokemon.id,
                           pokemonType
                         );
                       })}
@@ -129,12 +135,7 @@ export function Pokedex() {
       ) : (
         renderPokemons()
       )}
-      <PokemonDescription
-        ref={modalRef}
-        open={modalController}
-        pokemon={selectedPokemon}
-        setOpen={setModalController}
-      />
+      <PokemonDescription ref={modalRef} />
     </Box>
   );
 }

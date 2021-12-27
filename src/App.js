@@ -1,9 +1,8 @@
-import { Pokedex } from './Pages/Pokedex.js/index.js';
-import "./app.css";
-
+import { Pokedex } from "./Components/Pokedex";
+import "./App.css";
 
 function App() {
-    return (
+  return (
     <div>
       <Pokedex />
     </div>
