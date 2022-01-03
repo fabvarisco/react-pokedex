@@ -19,9 +19,11 @@ import {
   SearchIconWrapper,
   StyledInputBase,
   StyledPokemonNumber,
+  StyledPokeballLoading,
 } from "./style";
 import { pokemonTypeStyle } from "../../utils/utils";
 import PokemonDescription from "../../Components/PokemonDescription";
+import "animate.css";
 
 export function Pokedex() {
   const [pokemons, setPokemons] = useState([]);
@@ -47,64 +49,59 @@ export function Pokedex() {
       .catch((err) => console.error(err));
   }, []);
 
+  function renderPokemonsSkeleton() {
+    // referencia https://codepen.io/dd-monsoon/pen/KgpXpk
+    return <StyledPokeballLoading></StyledPokeballLoading>;
+  }
+
   function renderPokemons() {
-    console.log(pokemons);
-    if (!pokemons) return <>Loading</>;
     return (
-      <Box m={8} mt={2}>
-        <Grid
-          container
-          spacing={{ xs: 4, md: 2 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
-        >
-          {pokemons
-            ?.filter(({ name, num }) => {
-              if (search === "") return true;
-              return (
-                name.toLowerCase().includes(search) || num.includes(search)
-              );
-            })
-            .map((pokemon) => (
-              <Grid
-                item
-                xs
-                sm={4}
-                md={2}
-                key={pokemon.id}
-                onClick={() => handleOpenPokemonDescription(pokemon)}
-              >
-                <Card sx={{ maxWidth: 345 }}>
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      image={pokemon.img}
-                      alt={pokemon.name}
-                      height="240"
-                      style={{ background: "#CBC7C6" }}
-                    />
-                    <StyledPokemonNumber>#{pokemon.num}</StyledPokemonNumber>
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        {pokemon.name}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
+      <>
+        {pokemons
+          ?.filter(({ name, num }) => {
+            if (search === "") return true;
+            return name.toLowerCase().includes(search) || num.includes(search);
+          })
+          .map((pokemon) => (
+            <Grid
+              item
+              xs
+              sm={4}
+              md={2}
+              key={pokemon.id}
+              onClick={() => handleOpenPokemonDescription(pokemon)}
+            >
+              <Card sx={{ maxWidth: 345 }}>
+                <CardActionArea>                  
+                  <CardMedia
+                    component="img"
+                    image={pokemon.img}
+                    alt={pokemon.name}
+                    height="240"
+                    style={{ background: "#CBC7C6" }}
+                  />
+                  <StyledPokemonNumber>#{pokemon.num}</StyledPokemonNumber>
                   <CardContent>
-                    <Stack direction="row" spacing={1}>
-                      {pokemon.type?.map((pokemonType, index) => {
-                        return pokemonTypeStyle[pokemonType](
-                          index,
-                          pokemon.id,
-                          pokemonType
-                        );
-                      })}
-                    </Stack>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {pokemon.name}
+                    </Typography>
                   </CardContent>
-                </Card>
-              </Grid>
-            ))}
-        </Grid>
-      </Box>
+                </CardActionArea>
+                <CardContent>
+                  <Stack direction="row" spacing={1}>
+                    {pokemon.type?.map((pokemonType, index) => {
+                      return pokemonTypeStyle[pokemonType](
+                        index,
+                        pokemon.id,
+                        pokemonType
+                      );
+                    })}
+                  </Stack>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+      </>
     );
   }
 
@@ -128,13 +125,16 @@ export function Pokedex() {
           </Search>
         </Toolbar>
       </AppBar>
-      {loading ? (
-        <Box>
-          <Skeleton />
-        </Box>
-      ) : (
-        renderPokemons()
-      )}
+
+      <Box m={8} mt={2}>
+        <Grid
+          container
+          spacing={{ xs: 4, md: 2 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
+        >
+          {loading ? renderPokemonsSkeleton() : renderPokemons()}
+        </Grid>
+      </Box>
       <PokemonDescription ref={modalRef} />
     </Box>
   );
