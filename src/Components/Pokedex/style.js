@@ -91,10 +91,10 @@ export const StyledPokeballLoading = styled("div")(`
     top: 50%;
     transform: translate(-50%,-50%);
     border-radius: 50%;
-    box-shadow: 0 0 0 10px black,
+    box-shadow: 0 0 0 2px black,
                 0 0 0 2px #ddd,
-                0 0 0 (50px/14) black,
-                0 0 10px (50px/17) rgba(0,0,0,0.4);
+                0 0 0 3.5714285714px black,
+                0 0 10px 2.9411764706px rgba(0,0,0,0.4);
   }
   animation: tada 1200ms infinite;
 
