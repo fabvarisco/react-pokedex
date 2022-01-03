@@ -21,7 +21,7 @@ import {
   StyledPokemonNumber,
   StyledPokeballLoading,
 } from "./style";
-import { pokemonTypeStyle } from "../../utils/utils";
+import { pokemonColorStyle, pokemonTypeStyle } from "../../utils/utils";
 import PokemonDescription from "../../Components/PokemonDescription";
 import "animate.css";
 
@@ -78,7 +78,7 @@ export function Pokedex() {
                     image={pokemon.img}
                     alt={pokemon.name}
                     height="240"
-                    style={{ background: "#CBC7C6" }}
+                    style={{ background: `linear-gradient(180deg, ${pokemonColorStyle[pokemon.type[0] || pokemon.type] }, 40%, transparent)`} }
                   />
                   <StyledPokemonNumber>#{pokemon.num}</StyledPokemonNumber>
                   <CardContent>
