@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   Grid,
   Card,
@@ -9,9 +9,7 @@ import {
   AppBar,
   Box,
   Toolbar,
-  Skeleton,
   Stack,
-  Item,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import {
@@ -24,30 +22,19 @@ import {
 import { pokemonColorStyle, pokemonTypeStyle } from "../../utils/utils";
 import PokemonDescription from "../../Components/PokemonDescription";
 import "animate.css";
+import { useFetch } from "../../Hooks/useFetch";
 
 export function Pokedex() {
-  const [pokemons, setPokemons] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-
+  const { data, loading } = useFetch(
+    "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"
+  );
   const modalRef = useRef(null);
 
   function handleOpenPokemonDescription(pokemon) {
     modalRef.current?.setPokemon(pokemon);
     modalRef.current?.handleControllPokemonDescription();
   }
-
-  useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"
-    )
-      .then((response) => response.json())
-      .then(({ pokemon }) => {
-        setPokemons(pokemon);
-        setLoading(false);
-      })
-      .catch((err) => console.error(err));
-  }, []);
 
   function renderPokemonsSkeleton() {
     // referencia https://codepen.io/dd-monsoon/pen/KgpXpk
@@ -57,7 +44,7 @@ export function Pokedex() {
   function renderPokemons() {
     return (
       <>
-        {pokemons
+        {data
           ?.filter(({ name, num }) => {
             if (search === "") return true;
             return name.toLowerCase().includes(search) || num.includes(search);
@@ -72,13 +59,17 @@ export function Pokedex() {
               onClick={() => handleOpenPokemonDescription(pokemon)}
             >
               <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea>                  
+                <CardActionArea>
                   <CardMedia
                     component="img"
                     image={pokemon.img}
                     alt={pokemon.name}
                     height="240"
-                    style={{ background: `linear-gradient(180deg, ${pokemonColorStyle[pokemon.type[0] || pokemon.type] }, 40%, transparent)`} }
+                    style={{
+                      background: `linear-gradient(180deg, ${
+                        pokemonColorStyle[pokemon.type[0] || pokemon.type]
+                      }, 40%, transparent)`,
+                    }}
                   />
                   <StyledPokemonNumber>#{pokemon.num}</StyledPokemonNumber>
                   <CardContent>
