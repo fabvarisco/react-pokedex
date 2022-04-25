@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import {
   Grid,
   Card,
@@ -43,8 +43,8 @@ export function Pokedex() {
 
   function renderPokemons() {
     return (
-      <>
-        {data
+      <Fragment>
+        {data.pokemon
           ?.filter(({ name, num }) => {
             if (search === "") return true;
             return name.toLowerCase().includes(search) || num.includes(search);
@@ -92,7 +92,7 @@ export function Pokedex() {
               </Card>
             </Grid>
           ))}
-      </>
+      </Fragment>
     );
   }
 
