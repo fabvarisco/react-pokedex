@@ -1,4 +1,4 @@
-import { Divider, Modal, Stack, Typography } from "@mui/material";
+import { Modal, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { forwardRef, useImperativeHandle, useState } from "react";
 import {
@@ -22,8 +22,6 @@ function PokemonDescription({}, ref) {
       prev_evolution,
       height,
       weight,
-      spawn_chance,
-      spawn_time,
     },
     setPokemon,
   ] = useState({
@@ -79,11 +77,11 @@ function PokemonDescription({}, ref) {
                 spacing={1}
               >
                 {prev_evolution?.map(({ num }) => (
-                  <img src={getPokemonEvolution(num)} key={`${num}-${id}`} />
+                  <img src={getPokemonEvolution(num)} alt={name} key={`${num}-${id}`} />
                 ))}
 
                 {next_evolution?.map(({ num }) => (
-                  <img src={getPokemonEvolution(num)} key={`${num}-${id}`} />
+                  <img src={getPokemonEvolution(num)} alt={name} key={`${num}-${id}`} />
                 ))}
               </Stack>
             </Typography>
@@ -110,7 +108,7 @@ function PokemonDescription({}, ref) {
       </Typography>
     );
   }
-  console.log(type);
+
   return (
     <Modal
       open={visible}
@@ -122,7 +120,7 @@ function PokemonDescription({}, ref) {
     >
       <StyledBox>
         <StyledHeader typecolor={pokemonColorStyle[type[0]]}>
-          <img src={img} style={{ minWidth: 120 }} width={"20%"} />
+          <img src={img} style={{ minWidth: 120 }} alt={name} width={"20%"} />
         </StyledHeader>
 
         <Box>

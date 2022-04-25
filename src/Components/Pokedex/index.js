@@ -26,7 +26,7 @@ import { useFetch } from "../../Hooks/useFetch";
 
 export function Pokedex() {
   const [search, setSearch] = useState("");
-  const { data, loading } = useFetch(
+  const { data, loading, error } = useFetch(
     "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"
   );
   const modalRef = useRef(null);
@@ -123,6 +123,7 @@ export function Pokedex() {
           spacing={{ xs: 4, md: 2 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
+          {error && <Fragment> {error.message} </ Fragment>}
           {loading ? renderPokemonsSkeleton() : renderPokemons()}
         </Grid>
       </Box>
