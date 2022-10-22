@@ -27,7 +27,7 @@ import "animate.css";
 export function Pokedex() {
   const [search, setSearch] = useState("");
   const { data, loading, error } = useFetch(
-    "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"
+    process.env.REACT_APP_API_POKEMON
   );
   const modalRef = useRef(null);
 

@@ -1,6 +1,5 @@
-import { Modal, Stack, Typography } from "@mui/material";
-import { Box } from "@mui/system";
 import { forwardRef, Fragment, useImperativeHandle, useState } from "react";
+import { Box, Modal, Stack, Typography } from "@mui/material";
 import {
   getPokemonEvolution,
   pokemonColorStyle,
@@ -66,7 +65,7 @@ function PokemonDescription({ }, ref) {
 
   function renderEvolutions() {
     return (
-      <>
+      <Fragment>
         {((prev_evolution || next_evolution) && (
           <Typography component="span" variant="h5" style={{marginBottom:40}}>
             Evoluções
@@ -86,7 +85,7 @@ function PokemonDescription({ }, ref) {
             </Stack>
           </Typography>
         ))}
-      </>
+      </Fragment>
     );
   }
 
