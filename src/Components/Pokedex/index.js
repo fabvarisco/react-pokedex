@@ -51,28 +51,28 @@ export function Pokedex() {
           .map((pokemon) => (
             <Grid
               item
-              xs
+              xs={6}
               sm={4}
               md={2}
               key={pokemon.id}
               onClick={() => handleOpenPokemonDescription(pokemon)}
             >
-              <Card sx={{ maxWidth: 345, minWidth:247 }}>
+              <Card style={{ minHeight: 367,    }}>
                 <CardActionArea>
                   <CardMedia
                     component="img"
                     image={pokemon.img}
                     alt={pokemon.name}
-                    height="240"
                     style={{
-                      background: `linear-gradient(180deg, ${
-                        pokemonColorStyle[pokemon.type[0] || pokemon.type]
-                      }, 40%, transparent)`,
+                      background: `linear-gradient(180deg, ${pokemonColorStyle[pokemon.type[0] || pokemon.type]
+                        }, 40%, transparent)`,
+                      height: "160px",
+                      overflow:'scroll',
                     }}
                   />
                   <StyledPokemonNumber>#{pokemon.num}</StyledPokemonNumber>
                   <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography variant="h6" component="p" >
                       {pokemon.name}
                     </Typography>
                   </CardContent>

@@ -68,7 +68,7 @@ function PokemonDescription({ }, ref) {
     return (
       <>
         {((prev_evolution || next_evolution) && (
-          <Typography component="span" variant="h5" sx={{ mt: 2 }}>
+          <Typography component="span" variant="h5" style={{marginBottom:40}}>
             Evoluções
             <Stack
               direction="row"
@@ -93,13 +93,11 @@ function PokemonDescription({ }, ref) {
   function renderWeaknesses() {
     return (
       <Fragment>
-        <Typography component={"span"} variant="h5" sx={{ mt: 2 }}>
+        <Typography component={"p"} variant="h6" style={{marginBottom:10}}>
           Fraquezas
         </Typography>
         <Box  sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 2 }} >
-          {weaknesses?.map((pokemonType, index) => {
-            return pokemonTypeStyle[pokemonType](index, id, pokemonType);
-          })}
+          {weaknesses?.map((pokemonType, index) => pokemonTypeStyle[pokemonType](index, id, pokemonType))}
         </Box>
       </Fragment>
 
@@ -113,7 +111,6 @@ function PokemonDescription({ }, ref) {
         handleControllPokemonDescription();
       }}
            
-      style={{ marginTop: 20, marginBottom: 20 }}
     >
       <StyledBox>
         <StyledHeader typecolor={pokemonColorStyle[type[0]]}>
@@ -124,7 +121,7 @@ function PokemonDescription({ }, ref) {
           <Typography variant="subtitle2" component="h6">
             <StyledPokemonNumber>#{num}</StyledPokemonNumber>
           </Typography>
-          <Typography variant="h4" component="h2">
+          <Typography variant="h4" component="h2" style={{marginBottom:20}}>
             {name}
           </Typography>
 
