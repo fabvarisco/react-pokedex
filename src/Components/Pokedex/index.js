@@ -11,7 +11,6 @@ import {
   Toolbar,
   Stack,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
 import {
   Search,
   SearchIconWrapper,
@@ -19,10 +18,11 @@ import {
   StyledPokemonNumber,
   StyledPokeballLoading,
 } from "./style";
+import SearchIcon from "@mui/icons-material/Search";
 import { pokemonColorStyle, pokemonTypeStyle } from "../../utils/utils";
+import { useFetch } from "../../Hooks/useFetch";
 import PokemonDescription from "../../Components/PokemonDescription";
 import "animate.css";
-import { useFetch } from "../../Hooks/useFetch";
 
 export function Pokedex() {
   const [search, setSearch] = useState("");
@@ -36,9 +36,8 @@ export function Pokedex() {
     modalRef.current?.handleControllPokemonDescription();
   }
 
-  function renderPokemonsSkeleton() {
-    // referencia https://codepen.io/dd-monsoon/pen/KgpXpk
-    return <StyledPokeballLoading></StyledPokeballLoading>;
+  function renderPokemonLoading() {
+    return <StyledPokeballLoading />;
   }
 
   function renderPokemons() {
@@ -58,7 +57,7 @@ export function Pokedex() {
               key={pokemon.id}
               onClick={() => handleOpenPokemonDescription(pokemon)}
             >
-              <Card sx={{ maxWidth: 345 }}>
+              <Card sx={{ maxWidth: 345, minWidth:247 }}>
                 <CardActionArea>
                   <CardMedia
                     component="img"
@@ -123,8 +122,8 @@ export function Pokedex() {
           spacing={{ xs: 4, md: 2 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {error && <Fragment> {error.message} </ Fragment>}
-          {loading ? renderPokemonsSkeleton() : renderPokemons()}
+          {error ? <Fragment> {error.message} </ Fragment> : null}
+          {loading ? renderPokemonLoading() : renderPokemons()}
         </Grid>
       </Box>
       <PokemonDescription ref={modalRef} />

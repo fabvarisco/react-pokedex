@@ -1,6 +1,6 @@
 import { Modal, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, Fragment, useImperativeHandle, useState } from "react";
 import {
   getPokemonEvolution,
   pokemonColorStyle,
@@ -8,7 +8,7 @@ import {
 } from "../../utils/utils";
 import { StyledBox, StyledHeader, StyledPokemonNumber } from "./style";
 
-function PokemonDescription({}, ref) {
+function PokemonDescription({ }, ref) {
   const [visible, setVisible] = useState(false);
   const [
     {
@@ -68,44 +68,41 @@ function PokemonDescription({}, ref) {
     return (
       <>
         {((prev_evolution || next_evolution) && (
-            <Typography component="span" variant="h5" sx={{ mt: 2 }}>
-              Evoluções
-              <Stack
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-                spacing={1}
-              >
-                {prev_evolution?.map(({ num }) => (
-                  <img src={getPokemonEvolution(num)} alt={name} key={`${num}-${id}`} />
-                ))}
+          <Typography component="span" variant="h5" sx={{ mt: 2 }}>
+            Evoluções
+            <Stack
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              spacing={1}
+            >
+              {prev_evolution?.map(({ num }) => (
+                <img src={getPokemonEvolution(num)} alt={name} key={`${num}-${id}`} />
+              ))}
 
-                {next_evolution?.map(({ num }) => (
-                  <img src={getPokemonEvolution(num)} alt={name} key={`${num}-${id}`} />
-                ))}
-              </Stack>
-            </Typography>
-          ))}
+              {next_evolution?.map(({ num }) => (
+                <img src={getPokemonEvolution(num)} alt={name} key={`${num}-${id}`} />
+              ))}
+            </Stack>
+          </Typography>
+        ))}
       </>
     );
   }
 
   function renderWeaknesses() {
     return (
-      <Typography component={"span"} variant="h5" sx={{ mt: 2 }}>
-        Fraquezas
-        <Stack
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          spacing={1}
-          style={{ margin: 20 }}
-        >
+      <Fragment>
+        <Typography component={"span"} variant="h5" sx={{ mt: 2 }}>
+          Fraquezas
+        </Typography>
+        <Box  sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 2 }} >
           {weaknesses?.map((pokemonType, index) => {
             return pokemonTypeStyle[pokemonType](index, id, pokemonType);
           })}
-        </Stack>
-      </Typography>
+        </Box>
+      </Fragment>
+
     );
   }
 
@@ -115,12 +112,12 @@ function PokemonDescription({}, ref) {
       onClose={() => {
         handleControllPokemonDescription();
       }}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
+           
+      style={{ marginTop: 20, marginBottom: 20 }}
     >
       <StyledBox>
         <StyledHeader typecolor={pokemonColorStyle[type[0]]}>
-          <img src={img} style={{ minWidth: 120 }} alt={name} width={"20%"} />
+          <img src={img} alt={name} />
         </StyledHeader>
 
         <Box>
@@ -131,18 +128,16 @@ function PokemonDescription({}, ref) {
             {name}
           </Typography>
 
-          <div style={{ margin: "20px" }}>
-            <Stack
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-              spacing={1}
-            >
-              {type?.map((pokemonType, index) => {
-                return pokemonTypeStyle[pokemonType](index, id, pokemonType);
-              })}
-            </Stack>
-          </div>
+          <Stack
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            spacing={1}
+          >
+            {type?.map((pokemonType, index) => {
+              return pokemonTypeStyle[pokemonType](index, id, pokemonType);
+            })}
+          </Stack>
         </Box>
         <Box>
           {renderDescriptions()}
