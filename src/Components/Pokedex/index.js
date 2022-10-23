@@ -57,7 +57,7 @@ export function Pokedex() {
               key={pokemon.id}
               onClick={() => handleOpenPokemonDescription(pokemon)}
             >
-              <Card style={{ minHeight: 367,    }}>
+              <Card style={{ minHeight: 367 }}>
                 <CardActionArea>
                   <CardMedia
                     component="img"
