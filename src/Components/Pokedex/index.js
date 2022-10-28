@@ -22,7 +22,7 @@ import {
 } from "./style";
 import SearchIcon from "@mui/icons-material/Search";
 import PokemonDescription from "../../Components/PokemonDescription";
-
+import "animate.css"
 
 export function Pokedex() {
   const [search, setSearch] = useState("");

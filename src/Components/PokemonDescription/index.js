@@ -95,7 +95,7 @@ function PokemonDescription({ }, ref) {
         <Typography component={"p"} variant="h6" style={{marginBottom:10}}>
           Fraquezas
         </Typography>
-        <Box  sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 2 }} >
+        <Box  sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 2 , marginBottom:3 }} >
           {weaknesses?.map((pokemonType, index) => pokemonTypeStyle[pokemonType](index, id, pokemonType))}
         </Box>
       </Fragment>
