@@ -1,4 +1,6 @@
 import { Fragment, useRef, useState } from "react";
+import { pokemonColorStyle, pokemonTypeStyle } from "../../utils/utils";
+import { useFetch } from "../../Hooks/useFetch";
 import {
   Grid,
   Card,
@@ -19,10 +21,8 @@ import {
   StyledPokeballLoading,
 } from "./style";
 import SearchIcon from "@mui/icons-material/Search";
-import { pokemonColorStyle, pokemonTypeStyle } from "../../utils/utils";
-import { useFetch } from "../../Hooks/useFetch";
 import PokemonDescription from "../../Components/PokemonDescription";
-import "animate.css";
+
 
 export function Pokedex() {
   const [search, setSearch] = useState("");
@@ -67,7 +67,7 @@ export function Pokedex() {
                       background: `linear-gradient(180deg, ${pokemonColorStyle[pokemon.type[0] || pokemon.type]
                         }, 40%, transparent)`,
                       height: "160px",
-                      overflow:'scroll',
+                      overflow: 'scroll',
                     }}
                   />
                   <StyledPokemonNumber>#{pokemon.num}</StyledPokemonNumber>
