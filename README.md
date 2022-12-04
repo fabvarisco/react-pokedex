@@ -13,7 +13,7 @@ A Pokédex from the first Pokémons generation
 * React
 
 ## App
-* Github Page: https://fabriciovo.github.io/react-pokedex/
+* Page: https://react-pokedex-rho.vercel.app/
 
 
 ## Credits
