@@ -11,6 +11,7 @@ A Pokédex from the first Pokémons generation
 
 ## Built With
 * React
+* MUI
 
 ## App
 * Page: https://react-pokedex-rho.vercel.app/
