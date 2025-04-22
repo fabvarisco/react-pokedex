@@ -22,13 +22,11 @@ import {
 } from "./style";
 import SearchIcon from "@mui/icons-material/Search";
 import PokemonDescription from "../../Components/PokemonDescription";
-import "animate.css"
+import "animate.css";
 
 export function Pokedex() {
   const [search, setSearch] = useState("");
-  const { data, loading, error } = useFetch(
-    process.env.REACT_APP_API_POKEMON
-  );
+  const { data, loading, error } = useFetch(process.env.REACT_APP_API_POKEMON);
   const modalRef = useRef(null);
 
   function handleOpenPokemonDescription(pokemon) {
@@ -57,37 +55,39 @@ export function Pokedex() {
               key={pokemon.id}
               onClick={() => handleOpenPokemonDescription(pokemon)}
             >
-              <Card style={{ minHeight: 367 }}>
+              <Card>
                 <CardActionArea>
                   <CardMedia
                     component="img"
                     image={pokemon.img}
                     alt={pokemon.name}
                     style={{
-                      background: `linear-gradient(180deg, ${pokemonColorStyle[pokemon.type[0] || pokemon.type]
-                        }, 40%, transparent)`,
+                      background: `linear-gradient(180deg, ${
+                        pokemonColorStyle[pokemon.type[0] || pokemon.type]
+                      }, 40%, transparent)`,
                       height: "160px",
-                      overflow: 'scroll',
+                      overflow: "scroll",
+                      objectFit: "contain",
                     }}
                   />
                   <StyledPokemonNumber>#{pokemon.num}</StyledPokemonNumber>
                   <CardContent>
-                    <Typography variant="h6" component="p" >
+                    <Typography variant="h6" component="p">
                       {pokemon.name}
                     </Typography>
                   </CardContent>
+                  <CardContent>
+                    <Stack direction="row" spacing={1}>
+                      {pokemon.type?.map((pokemonType, index) => {
+                        return pokemonTypeStyle[pokemonType](
+                          index,
+                          pokemon.id,
+                          pokemonType
+                        );
+                      })}
+                    </Stack>
+                  </CardContent>
                 </CardActionArea>
-                <CardContent>
-                  <Stack direction="row" spacing={1}>
-                    {pokemon.type?.map((pokemonType, index) => {
-                      return pokemonTypeStyle[pokemonType](
-                        index,
-                        pokemon.id,
-                        pokemonType
-                      );
-                    })}
-                  </Stack>
-                </CardContent>
               </Card>
             </Grid>
           ))}
@@ -122,7 +122,7 @@ export function Pokedex() {
           spacing={{ xs: 4, md: 2 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {error ? <Fragment> {error.message} </ Fragment> : null}
+          {error ? <Fragment> {error.message} </Fragment> : null}
           {loading ? renderPokemonLoading() : renderPokemons()}
         </Grid>
       </Box>
