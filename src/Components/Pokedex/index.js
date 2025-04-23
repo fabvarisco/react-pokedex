@@ -19,10 +19,12 @@ import {
   StyledInputBase,
   StyledPokemonNumber,
   StyledPokeballLoading,
+  StyledLink,
 } from "./style";
 import SearchIcon from "@mui/icons-material/Search";
 import PokemonDescription from "../../Components/PokemonDescription";
 import "animate.css";
+import { Padding } from "@mui/icons-material";
 
 export function Pokedex() {
   const [search, setSearch] = useState("");
@@ -97,23 +99,30 @@ export function Pokedex() {
 
   return (
     <Box>
-      <AppBar position="static" style={{ background: "#313131" }}>
-        <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            Pokédex
-          </Typography>
-          <Search onChange={(e) => setSearch(e.target.value)}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase inputProps={{ "aria-label": "search" }} />
-          </Search>
+      <AppBar
+        position="static"
+        style={{
+          background: "#313131",
+          display: "flex",
+          justifyContent: "space-between",
+          flexDirection: "row",
+        }}
+      >
+        <Toolbar style={{ padding: 0 }}>
+          <StyledLink href="/" className="a-active">
+          <img src="/favicon.ico" width="24" />
+          Pokédex</StyledLink>
+          <StyledLink href={process.env.REACT_APP_URL_POKEMEMORY} >
+            <img src={`${process.env.REACT_APP_URL_POKEMEMORY}/jquery.svg`} width="24" />
+            Pokémemory
+          </StyledLink>
         </Toolbar>
+        <Search onChange={(e) => setSearch(e.target.value)} height={32} style={{margin: 24}}>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase inputProps={{ "aria-label": "search" }} />
+        </Search>
       </AppBar>
 
       <Box m={8} mt={2}>

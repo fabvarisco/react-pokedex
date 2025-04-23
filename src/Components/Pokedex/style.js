@@ -1,5 +1,5 @@
 import { styled, alpha } from "@mui/material/styles";
-import {  InputBase } from "@mui/material";
+import { InputBase, Link } from "@mui/material";
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -42,6 +42,33 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+export const StyledLink = styled(Link)(
+  () => `
+  color: white;
+  text-decoration: none;
+  height: 100%;
+  align-content: center;
+  padding-left: 8px;
+  padding-right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 64px;
+  padding-left: 24px;
+  padding-right: 24px;
+  color: #747171;
+  
+    &:hover {
+      background-color: #474747;
+      color: white;
+    }
+    
+    &.a-active {
+    color: white;
+    }
+  
+  `
+);
 
 export const StyledPokemonNumber = styled("div")(`
 font-family: "Flexo-Bold",arial,sans-serif;
@@ -50,7 +77,6 @@ padding-top: 8px;
 padding-left: 12px;
 font-weight: bold;
 `);
-
 
 export const StyledPokeballLoading = styled("div")(`
   width:50px;
@@ -98,4 +124,4 @@ export const StyledPokeballLoading = styled("div")(`
   }
   animation: tada 1200ms infinite;
 
-`)
+`);
