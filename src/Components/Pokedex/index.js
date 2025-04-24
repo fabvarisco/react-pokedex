@@ -106,6 +106,7 @@ export function Pokedex() {
           display: "flex",
           justifyContent: "space-between",
           flexDirection: "row",
+          height: 64,
         }}
       >
         <Toolbar style={{ padding: 0 }}>
@@ -117,7 +118,7 @@ export function Pokedex() {
             Pokémemory
           </StyledLink>
         </Toolbar>
-        <Search onChange={(e) => setSearch(e.target.value)} height={32} style={{margin: 24}}>
+        <Search onChange={(e) => setSearch(e.target.value)} height={32} style={{margin:16}}>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
