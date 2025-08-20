@@ -51,8 +51,10 @@ export function Pokedex() {
           .map((pokemon) => (
             <Grid
               item
-              container
-              container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}
+              spacing={1}
+              xs={6}
+              sm={4}
+              md={2}
               key={pokemon.id}
               onClick={() => handleOpenPokemonDescription(pokemon)}
             >
