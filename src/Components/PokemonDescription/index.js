@@ -83,7 +83,7 @@ function PokemonDescription({}, ref) {
                 <img
                   src={getPokemonEvolution(num)}
                   alt={name}
-                  key={`${num}-${id}`}
+                  key={`${num}-${id}`}                
                 />
               ))}
 
@@ -133,7 +133,7 @@ function PokemonDescription({}, ref) {
     >
       <StyledBox>
         <StyledHeader typecolor={pokemonColorStyle[type[0]]}>
-          <img src={img} alt={name} />
+          <img src={img} alt={name} width={240} height={240}/>
         </StyledHeader>
 
         <Box>

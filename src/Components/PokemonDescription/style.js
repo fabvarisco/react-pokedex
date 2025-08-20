@@ -7,7 +7,7 @@ export const StyledBox = styled(Box)(() => ({
   left: "50%",
   transform: "translate(-50%, -50%)",
   background: "white",
-  height: "90%",
+  height: "70%",
   width: "70%",
   textAlign: "center",
   backgroundImage: `url(../../public/body_bg.png)`,
@@ -25,5 +25,6 @@ export const StyledHeader = styled("div")(
   ({ typecolor }) => `
 background: linear-gradient(180deg, ${typecolor} 10%, transparent);
 border-radius: 10px;
+padding: 24px;
 `
 );
