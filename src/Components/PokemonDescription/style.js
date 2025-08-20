@@ -12,9 +12,7 @@ export const StyledBox = styled(Box)(() => ({
   textAlign: "center",
   backgroundImage: `url(../../public/body_bg.png)`,
   borderRadius: 10,
-  overflow:'auto',
-
-  
+  overflow: "auto",
 }));
 
 export const StyledPokemonNumber = styled("div")(`

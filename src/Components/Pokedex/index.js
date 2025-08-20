@@ -20,11 +20,11 @@ import {
   StyledPokemonNumber,
   StyledPokeballLoading,
   StyledLink,
+  StyledAppBar,
 } from "./style";
 import SearchIcon from "@mui/icons-material/Search";
 import PokemonDescription from "../../Components/PokemonDescription";
 import "animate.css";
-import { Padding } from "@mui/icons-material";
 
 export function Pokedex() {
   const [search, setSearch] = useState("");
@@ -99,34 +99,33 @@ export function Pokedex() {
 
   return (
     <Box>
-      <AppBar
-        position="static"
-        style={{
-          background: "#313131",
-          display: "flex",
-          justifyContent: "space-between",
-          flexDirection: "row",
-          height: 64,
-        }}
-      >
-        <Toolbar style={{ padding: 0 }}>
+      <StyledAppBar position="static">
+        <Toolbar>
           <StyledLink href="/" className="a-active">
-          <img src="/favicon.ico" width="24" />
-          Pokédex</StyledLink>
-          <StyledLink href={process.env.REACT_APP_URL_POKEMEMORY} >
-            <img src={`${process.env.REACT_APP_URL_POKEMEMORY}/jquery.svg`} width="24" />
+            <img src="/favicon.ico" width="24" />
+            Pokédex
+          </StyledLink>
+          <StyledLink href={process.env.REACT_APP_URL_POKEMEMORY}>
+            <img
+              src={`${process.env.REACT_APP_URL_POKEMEMORY}/jquery.svg`}
+              width="24"
+            />
             Pokémemory
           </StyledLink>
         </Toolbar>
-        <Search onChange={(e) => setSearch(e.target.value)} height={32} style={{margin:16}}>
+        <Search
+          onChange={(e) => setSearch(e.target.value)}
+          height={32}
+          style={{ margin: 16 }}
+        >
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
           <StyledInputBase inputProps={{ "aria-label": "search" }} />
         </Search>
-      </AppBar>
+      </StyledAppBar>
 
-      <Box m={8} mt={2}>
+      <Box m={8}>
         <Grid
           container
           spacing={{ xs: 4, md: 2 }}

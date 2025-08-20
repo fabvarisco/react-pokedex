@@ -1,5 +1,6 @@
 import { styled, alpha } from "@mui/material/styles";
-import { InputBase, Link } from "@mui/material";
+import { AppBar, InputBase, Link } from "@mui/material";
+
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -124,3 +125,16 @@ export const StyledPokeballLoading = styled("div")(`
   animation: tada 1200ms infinite;
 
 `);
+
+export const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  background: "#313131",
+  display: "flex",
+  justifyContent: "space-between",
+  flexDirection: "row",
+  height: 64,
+
+  [theme.breakpoints.down("md")]: {
+    width: "100%",
+    flexDirection: "column",
+  },
+}));
