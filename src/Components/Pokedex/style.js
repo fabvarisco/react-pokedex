@@ -140,5 +140,6 @@ export const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
     display: "flex",
     flexWrap: "wrap", 
+    justifyContent: "center"
   },
 }));
