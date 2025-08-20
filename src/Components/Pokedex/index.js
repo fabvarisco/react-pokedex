@@ -8,19 +8,19 @@ import {
   Typography,
   CardActionArea,
   CardContent,
-  AppBar,
   Box,
   Toolbar,
   Stack,
 } from "@mui/material";
 import {
-  Search,
   SearchIconWrapper,
   StyledInputBase,
   StyledPokemonNumber,
   StyledPokeballLoading,
   StyledLink,
   StyledAppBar,
+  StyledSearch,
+  StyledToolbar,
 } from "./style";
 import SearchIcon from "@mui/icons-material/Search";
 import PokemonDescription from "../../Components/PokemonDescription";
@@ -100,7 +100,7 @@ export function Pokedex() {
   return (
     <Box>
       <StyledAppBar position="static">
-        <Toolbar>
+        <StyledToolbar>
           <StyledLink href="/" className="a-active">
             <img src="/favicon.ico" width="24" />
             Pokédex
@@ -112,17 +112,16 @@ export function Pokedex() {
             />
             Pokémemory
           </StyledLink>
-        </Toolbar>
-        <Search
-          onChange={(e) => setSearch(e.target.value)}
-          height={32}
-          style={{ margin: 16 }}
-        >
+        </StyledToolbar>
+        <StyledSearch onChange={(e) => setSearch(e.target.value)} height={32}>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
-          <StyledInputBase inputProps={{ "aria-label": "search" }} />
-        </Search>
+          <StyledInputBase
+            name="search-field"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </StyledSearch>
       </StyledAppBar>
 
       <Box m={8}>
